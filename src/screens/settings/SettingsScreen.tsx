@@ -51,11 +51,7 @@ import {
 } from '@/store/auth/authSelectors';
 import { logout, setAccount } from '@/store/auth/authSlice';
 import { authActions } from '@/store/auth/authActions';
-import {
-  selectLocale,
-  selectIsChatwootCloud,
-  selectPushToken,
-} from '@/store/settings/settingsSelectors';
+import { selectLocale, selectPushToken } from '@/store/settings/settingsSelectors';
 import { settingsActions } from '@/store/settings/settingsActions';
 import { setLocale } from '@/store/settings/settingsSlice';
 
@@ -66,10 +62,6 @@ import { CONVERSATION_PERMISSIONS } from '@/constants/permissions';
 import { useAppDispatch, useAppSelector } from '@/hooks';
 
 const appName = Application.applicationName;
-const appVersion = Application.nativeApplicationVersion;
-
-const buildNumber = Application.nativeBuildVersion;
-const appVersionDetails = buildNumber ? `${appVersion} (${buildNumber})` : appVersion;
 
 const SettingsScreen = () => {
   const navigation = useNavigation();
@@ -98,10 +90,6 @@ const SettingsScreen = () => {
   const hasConversationPermission = CONVERSATION_PERMISSIONS.some(permission =>
     userPermissions.includes(permission),
   );
-
-  const isChatwootCloud = useAppSelector(selectIsChatwootCloud);
-
-  const chatwootInstance = isChatwootCloud ? `${appName} cloud` : `${appName}`;
 
   const accounts = useSelector(selectAccounts) || [];
 
@@ -262,7 +250,7 @@ const SettingsScreen = () => {
         <Animated.View style={tailwind.style('pt-6')}>
           <SettingsList sectionTitle={i18n.t('SETTINGS.PREFERENCES')} list={preferencesList} />
         </Animated.View>
-        <Animated.View style={tailwind.style('pt-6 mx-4')}>
+        <Animated.View style={tailwind.style('mx-4 pt-6')}>
           <Button
             variant="secondary"
             text={i18n.t('SETTINGS.LOGOUT')}
@@ -273,9 +261,7 @@ const SettingsScreen = () => {
         <Pressable
           style={tailwind.style('p-4 items-center')}
           onLongPress={() => debugActionsSheetRef.current?.present()}>
-          <Text style={tailwind.style('text-sm text-gray-700 ')}>
-            {`${chatwootInstance} ${appVersionDetails}`}
-          </Text>
+          <Text style={tailwind.style('text-sm text-gray-700 ')}>{appName}</Text>
         </Pressable>
       </Animated.ScrollView>
       <BottomSheetModal

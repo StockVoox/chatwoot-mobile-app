@@ -14,15 +14,18 @@ type ButtonProps = {
 };
 
 const getButtonStyles = (isPrimary: boolean, pressed: boolean) => {
-  const baseStyles = 'py-[11px] flex items-center justify-center rounded-[13px]';
+  const baseStyles = 'self-stretch py-[11px] rounded-[13px]';
   const variantStyles = isPrimary ? 'bg-blue-800' : 'bg-gray-50';
   const pressedStyles = isPrimary ? 'opacity-95' : pressed ? 'bg-gray-100' : '';
 
-  return tailwind.style(baseStyles, variantStyles, pressedStyles);
+  return [
+    tailwind.style(baseStyles, variantStyles, pressedStyles),
+    { alignItems: 'center' as const, justifyContent: 'center' as const },
+  ];
 };
 
 const getTextStyles = (isPrimary: boolean, isDestructive: boolean) => {
-  const baseStyles = 'text-base font-medium tracking-[0.16px] leading-[22px]';
+  const baseStyles = 'text-base font-medium tracking-[0.16px] leading-[22px] text-center shrink-0';
   const colorStyles = isPrimary
     ? isDestructive
       ? 'text-tomato-800'
@@ -54,7 +57,7 @@ export const Button = ({
   const isPrimary = variant === 'primary';
 
   return (
-    <Animated.View style={animatedStyle}>
+    <Animated.View style={[animatedStyle, tailwind.style('self-stretch')]}>
       <Pressable
         onPress={handleButtonPress}
         disabled={disabled}

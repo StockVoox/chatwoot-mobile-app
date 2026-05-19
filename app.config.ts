@@ -50,7 +50,7 @@ export default ({ config }: ConfigContext): ExpoConfig => {
       },
       ...(iosGoogleServicesFile ? { googleServicesFile: iosGoogleServicesFile } : {}),
       entitlements: { 'aps-environment': 'production' },
-      associatedDomains: ['applinks:app.targetly-ai.com'],
+      associatedDomains: ['applinks:app.convohub.io'],
     },
     android: {
       adaptiveIcon: { foregroundImage: './assets/adaptive-icon.png', backgroundColor: '#ffffff' },
@@ -64,7 +64,7 @@ export default ({ config }: ConfigContext): ExpoConfig => {
           data: [
             {
               scheme: 'https',
-              host: 'app.targetly-ai.com',
+              host: 'app.convohub.io',
               pathPrefix: '/app/accounts/',
               pathPattern: '/*/conversations/*',
             },
@@ -88,7 +88,7 @@ export default ({ config }: ConfigContext): ExpoConfig => {
         storybookEnabled: process.env.EXPO_STORYBOOK_ENABLED,
       },
     },
-    owner: 'chatwoot',
+    owner: 'targetai-mobile',
     plugins: [
       'expo-font',
       ['react-native-permissions', { iosPermissions: ['Camera', 'PhotoLibrary', 'MediaLibrary'] }],

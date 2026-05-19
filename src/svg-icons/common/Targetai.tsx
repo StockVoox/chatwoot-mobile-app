@@ -5,7 +5,7 @@ export const TargetaiIcon = (): JSX.Element => {
   return (
     <Image
       // eslint-disable-next-line @typescript-eslint/no-require-imports
-      source={require('../../../../assets/adaptive-icon.png')}
+      source={require('@/assets/images/targetai-icon.png')}
       style={{ width: '100%', height: '100%' }}
       resizeMode="contain"
     />
