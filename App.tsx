@@ -1,7 +1,6 @@
-import * as Sentry from '@sentry/react-native';
-
 import Constants from 'expo-constants';
 import App from './src/app';
+import { initSentry, wrapApp } from '@/utils/sentry';
 
 // TODO: It is a temporary fix to fix the reanimated logger issue
 // Ref: https://github.com/gorhom/react-native-bottom-sheet/issues/1983
@@ -12,7 +11,7 @@ import './reanimatedConfig';
 const isStorybookEnabled = Constants.expoConfig?.extra?.eas?.storybookEnabled;
 
 if (!__DEV__) {
-  Sentry.init({
+  initSentry({
     dsn: process.env.EXPO_PUBLIC_SENTRY_DSN,
     tracesSampleRate: 1.0,
     attachScreenshot: true,
@@ -31,7 +30,7 @@ export default (() => {
   }
 
   if (!__DEV__) {
-    return Sentry.wrap(App);
+    return wrapApp(App);
   }
 
   console.log('Loading Development App');

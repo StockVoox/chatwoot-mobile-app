@@ -42,3 +42,6 @@ GoogleService-Info.plist
 .env
 .env.local
 /ref
+
+# Sentry Config File
+sentry.properties

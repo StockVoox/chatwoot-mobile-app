@@ -3,7 +3,7 @@ import { BottomTabBarProps, createBottomTabNavigator } from '@react-navigation/b
 import { createNativeStackNavigator } from '@react-navigation/native-stack';
 
 import { authActions } from '@/store/auth/authActions';
-import * as Sentry from '@sentry/react-native';
+import { setUser } from '@/utils/sentry';
 
 import { useAppDispatch, useAppSelector } from '@/hooks';
 import {
@@ -115,7 +115,7 @@ const Tabs = () => {
   }, []);
 
   const initSentry = useCallback(async () => {
-    Sentry.setUser({
+    setUser({
       id: user?.id,
       email: user?.email,
       account_id: user?.account_id,

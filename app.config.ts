@@ -2,6 +2,9 @@ import { ConfigContext, ExpoConfig } from 'expo/config';
 import fs from 'fs';
 import path from 'path';
 
+// eslint-disable-next-line @typescript-eslint/no-require-imports
+const { SENTRY_ENABLED } = require('./sentry.config.js');
+
 function resolveGoogleServicesFile(filePath: string | undefined): string | undefined {
   if (!filePath?.trim()) {
     return undefined;
@@ -92,14 +95,18 @@ export default ({ config }: ConfigContext): ExpoConfig => {
     plugins: [
       'expo-font',
       ['react-native-permissions', { iosPermissions: ['Camera', 'PhotoLibrary', 'MediaLibrary'] }],
-      [
-        '@sentry/react-native/expo',
-        {
-          url: 'https://sentry.io/',
-          project: process.env.EXPO_PUBLIC_SENTRY_PROJECT_NAME,
-          organization: process.env.EXPO_PUBLIC_SENTRY_ORG_NAME,
-        },
-      ],
+      ...(SENTRY_ENABLED
+        ? [
+            [
+              '@sentry/react-native/expo',
+              {
+                url: 'https://sentry.io/',
+                project: process.env.EXPO_PUBLIC_SENTRY_PROJECT_NAME,
+                organization: process.env.EXPO_PUBLIC_SENTRY_ORG_NAME,
+              },
+            ],
+          ]
+        : []),
       ...(iosGoogleServicesFile
         ? (['@react-native-firebase/app', '@react-native-firebase/messaging'] as const)
         : []),

@@ -1,7 +1,7 @@
-import * as Sentry from '@sentry/react-native';
 import { Alert } from 'react-native';
 
 import i18n from '../i18n';
+import { captureException } from '@/utils/sentry';
 
 interface ErrorHandler {
   (e: Error, isFatal: boolean): void;
@@ -9,7 +9,7 @@ interface ErrorHandler {
 
 // eslint-disable-next-line @typescript-eslint/no-unused-vars
 const errorHandler: ErrorHandler = (e, isFatal) => {
-  Sentry.captureException(e);
+  captureException(e);
   if (isFatal) {
     Alert.alert(
       i18n.t('COMMON.ERROR_TITLE'),

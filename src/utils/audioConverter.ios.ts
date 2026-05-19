@@ -1,6 +1,6 @@
 import RNFS from 'react-native-fs';
 import { FFmpegKit } from 'ffmpeg-kit-react-native';
-import * as Sentry from '@sentry/react-native';
+import { captureException } from '@/utils/sentry';
 
 export const convertOggToWav = async (oggUrl: string): Promise<string | Error> => {
   const tempOggPath = `${RNFS.CachesDirectoryPath}/temp.ogg`;
@@ -14,9 +14,7 @@ export const convertOggToWav = async (oggUrl: string): Promise<string | Error> =
 
     // Verify download was successful
     if (downloadResult.statusCode !== 200) {
-      Sentry.captureException(
-        new Error(`Download failed with status ${downloadResult.statusCode}`),
-      );
+      captureException(new Error(`Download failed with status ${downloadResult.statusCode}`));
       throw new Error(`Download failed with status ${downloadResult.statusCode}`);
     }
 
@@ -46,7 +44,7 @@ export const convertOggToWav = async (oggUrl: string): Promise<string | Error> =
 
     return `file://${outputPath}`;
   } catch (error) {
-    Sentry.captureException(error);
+    captureException(error);
     return error as Error;
   }
 };
@@ -67,7 +65,7 @@ export const convertAacToWav = async (inputPath: string): Promise<string> => {
 
     return outputPath; // 👈 Return without file:// prefix
   } catch (error) {
-    Sentry.captureException(error);
+    captureException(error);
     throw error;
   }
 };
