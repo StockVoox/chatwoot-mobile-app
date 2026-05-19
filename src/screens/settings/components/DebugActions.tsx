@@ -28,22 +28,22 @@ interface DebugAction {
 const DEBUG_ACTIONS: DebugAction[] = [
   {
     key: 'chatwoot_version',
-    label: 'Chatwoot Version',
+    label: 'Targetly AI Version',
     value: '',
   },
   {
     key: 'installation_url',
-    label: 'Installation URL',
+    label: 'Targetly AI Installation URL',
     value: '',
   },
   {
     key: 'web_socket_url',
-    label: 'Web Socket URL',
+    label: 'Targetly AI Web Socket URL',
     value: '',
   },
   {
     key: 'push_token',
-    label: 'Push Token',
+    label: 'Targetly AI Push Token',
     value: '',
   },
 ];

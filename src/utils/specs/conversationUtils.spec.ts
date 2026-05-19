@@ -54,7 +54,7 @@ export const conversation: Conversation = {
     {
       id: 438072,
       content:
-        'Chatwoot enables your team to be more productive, faster, and collaborate without switching apps.',
+        'Targetly AI enables your team to be more productive, faster, and collaborate without switching apps.',
       inboxId: 37,
       conversationId: 5811,
       messageType: 1,
@@ -70,6 +70,7 @@ export const conversation: Conversation = {
       lastNonActivityMessage: null,
       conversation: null,
       shouldRenderAvatar: false,
+      senderId: 1,
     },
     {
       id: 438100,
@@ -89,6 +90,7 @@ export const conversation: Conversation = {
       lastNonActivityMessage: null,
       conversation: null,
       shouldRenderAvatar: false,
+      senderId: 1,
     },
   ],
 };

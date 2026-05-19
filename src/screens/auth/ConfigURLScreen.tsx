@@ -30,7 +30,7 @@ const ConfigURLScreen = () => {
     formState: { errors },
   } = useForm({
     defaultValues: {
-      url: baseUrl ? baseUrl : appName === 'Chatwoot' ? 'app.targetly-ai.com' : '',
+      url: baseUrl ? baseUrl : appName === 'Targetly AI' ? 'app.targetly-ai.com' : '',
     },
   });
 

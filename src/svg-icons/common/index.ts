@@ -7,6 +7,7 @@ export * from './CaretBottomSmall';
 export * from './CaretRight';
 export * from './Chat';
 export * from './Chatwoot';
+export * from './Targetai';
 export * from './ChevronLeft';
 export * from './Clear';
 export * from './Close';

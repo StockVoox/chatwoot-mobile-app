@@ -20,8 +20,8 @@ export default ({ config }: ConfigContext): ExpoConfig => {
   );
 
   return {
-    name: 'Chatwoot',
-    slug: process.env.EXPO_PUBLIC_APP_SLUG || 'chatwoot-mobile',
+    name: 'Targetly AI',
+    slug: process.env.EXPO_PUBLIC_APP_SLUG || 'targetai-mobile',
     version: '4.5.0',
     orientation: 'portrait',
     icon: './assets/icon.png',
