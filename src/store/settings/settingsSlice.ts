@@ -20,8 +20,8 @@ interface SettingsState {
   pushToken: string;
 }
 const initialState: SettingsState = {
-  baseUrl: 'app.convohub.io',
-  installationUrl: 'https://app.convohub.io/',
+  baseUrl: 'app.targetly-ai.com',
+  installationUrl: 'https://app.targetly-ai.com/',
   uiFlags: {
     isSettingUrl: false,
     isUpdating: false,
@@ -37,7 +37,7 @@ const initialState: SettingsState = {
     selected_push_flags: [],
     user_id: 0,
   },
-  webSocketUrl: 'wss://app.convohub.io/cable',
+  webSocketUrl: 'wss://app.targetly-ai.com/cable',
   theme: 'system',
   version: '',
   pushToken: '',

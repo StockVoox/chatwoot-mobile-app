@@ -104,8 +104,8 @@ const LoginScreen = () => {
   };
 
   // TODO: Change this condition based on EE check
-  // Show SSO login button only if installation URL contains app.convohub.io
-  const showSsoLogin = false; // Hidden for now; was: installationUrl.includes('app.convohub.io')
+  // Show SSO login button only if installation URL contains app.targetly-ai.com
+  const showSsoLogin = false; // Hidden for now; was: installationUrl.includes('app.targetly-ai.com')
 
   const openResetPassword = () => {
     navigation.navigate('ResetPassword' as never);

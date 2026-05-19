@@ -30,7 +30,7 @@ const ConfigURLScreen = () => {
     formState: { errors },
   } = useForm({
     defaultValues: {
-      url: baseUrl ? baseUrl : appName === 'Targetly AI' ? 'app.convohub.io' : '',
+      url: baseUrl ? baseUrl : appName === 'Targetly AI' ? 'app.targetly-ai.com' : '',
     },
   });
 

@@ -50,7 +50,7 @@ export default ({ config }: ConfigContext): ExpoConfig => {
       },
       ...(iosGoogleServicesFile ? { googleServicesFile: iosGoogleServicesFile } : {}),
       entitlements: { 'aps-environment': 'production' },
-      associatedDomains: ['applinks:app.convohub.io'],
+      associatedDomains: ['applinks:app.targetly-ai.com'],
     },
     android: {
       adaptiveIcon: { foregroundImage: './assets/adaptive-icon.png', backgroundColor: '#ffffff' },
@@ -64,7 +64,7 @@ export default ({ config }: ConfigContext): ExpoConfig => {
           data: [
             {
               scheme: 'https',
-              host: 'app.convohub.io',
+              host: 'app.targetly-ai.com',
               pathPrefix: '/app/accounts/',
               pathPattern: '/*/conversations/*',
             },
@@ -84,7 +84,7 @@ export default ({ config }: ConfigContext): ExpoConfig => {
     },
     extra: {
       eas: {
-        projectId: process.env.EXPO_PUBLIC_PROJECT_ID,
+        projectId: '7bd798d9-48f7-479d-9ec8-7c31b357294b',
         storybookEnabled: process.env.EXPO_STORYBOOK_ENABLED,
       },
     },
