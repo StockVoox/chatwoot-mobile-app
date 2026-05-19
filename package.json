@@ -192,8 +192,7 @@
       "@expo/metro-config>minimatch": "3.1.4",
       "@expo/fingerprint>minimatch": "3.1.4",
       "@typescript-eslint/typescript-estree>minimatch": "9.0.7",
-      "glob>minimatch": "9.0.7",
-      "tar": "7.5.11"
+      "glob>minimatch": "9.0.7"
     }
   }
 }

@@ -1,6 +1,24 @@
 import { ConfigContext, ExpoConfig } from 'expo/config';
+import fs from 'fs';
+import path from 'path';
+
+function resolveGoogleServicesFile(filePath: string | undefined): string | undefined {
+  if (!filePath?.trim()) {
+    return undefined;
+  }
+
+  const resolvedPath = path.isAbsolute(filePath) ? filePath : path.join(__dirname, filePath);
+  return fs.existsSync(resolvedPath) ? filePath : undefined;
+}
 
 export default ({ config }: ConfigContext): ExpoConfig => {
+  const iosGoogleServicesFile = resolveGoogleServicesFile(
+    process.env.EXPO_PUBLIC_IOS_GOOGLE_SERVICES_FILE,
+  );
+  const androidGoogleServicesFile = resolveGoogleServicesFile(
+    process.env.EXPO_PUBLIC_ANDROID_GOOGLE_SERVICES_FILE,
+  );
+
   return {
     name: 'Chatwoot',
     slug: process.env.EXPO_PUBLIC_APP_SLUG || 'chatwoot-mobile',
@@ -30,8 +48,7 @@ export default ({ config }: ConfigContext): ExpoConfig => {
         UIBackgroundModes: ['fetch', 'remote-notification'],
         ITSAppUsesNonExemptEncryption: false,
       },
-      // Please use the relative path to the google-services.json file
-      googleServicesFile: process.env.EXPO_PUBLIC_IOS_GOOGLE_SERVICES_FILE,
+      ...(iosGoogleServicesFile ? { googleServicesFile: iosGoogleServicesFile } : {}),
       entitlements: { 'aps-environment': 'production' },
       associatedDomains: ['applinks:app.targetly-ai.com'],
     },
@@ -39,8 +56,7 @@ export default ({ config }: ConfigContext): ExpoConfig => {
       adaptiveIcon: { foregroundImage: './assets/adaptive-icon.png', backgroundColor: '#ffffff' },
       package: 'com.targetlyai.app',
       permissions: ['android.permission.CAMERA', 'android.permission.RECORD_AUDIO'],
-      // Please use the relative path to the google-services.json file
-      googleServicesFile: process.env.EXPO_PUBLIC_ANDROID_GOOGLE_SERVICES_FILE,
+      ...(androidGoogleServicesFile ? { googleServicesFile: androidGoogleServicesFile } : {}),
       intentFilters: [
         {
           action: 'VIEW',
@@ -84,8 +100,9 @@ export default ({ config }: ConfigContext): ExpoConfig => {
           organization: process.env.EXPO_PUBLIC_SENTRY_ORG_NAME,
         },
       ],
-      '@react-native-firebase/app',
-      '@react-native-firebase/messaging',
+      ...(iosGoogleServicesFile
+        ? (['@react-native-firebase/app', '@react-native-firebase/messaging'] as const)
+        : []),
       [
         'expo-build-properties',
         {
