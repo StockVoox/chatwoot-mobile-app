@@ -1,5 +1,5 @@
-import React, { useCallback, useEffect, useState } from 'react';
-import { StatusBar, Text, Platform, Pressable } from 'react-native';
+import React, { useCallback, useEffect } from 'react';
+import { StatusBar, Text, Pressable } from 'react-native';
 import Animated from 'react-native-reanimated';
 // import { SafeAreaView, useSafeAreaInsets } from 'react-native-safe-area-context';
 import { SafeAreaView } from 'react-native-safe-area-context';
@@ -11,9 +11,6 @@ import {
   BottomSheetScrollView,
   useBottomSheetSpringConfigs,
 } from '@gorhom/bottom-sheet';
-import DeviceInfo from 'react-native-device-info';
-import * as WebBrowser from 'expo-web-browser';
-import ChatWootWidget from '@chatwoot/react-native-widget';
 import { useSelector } from 'react-redux';
 import * as Application from 'expo-application';
 import { Account, AvailabilityStatus } from '@/types';
@@ -24,7 +21,6 @@ import { clearSearchResults } from '@/store/search/searchSlice';
 
 import { RecentSearches } from '@/screens/search/utils/recentSearches';
 import i18n from 'i18n';
-import { HELP_URL } from '@/constants/url';
 import { tailwind } from '@/theme';
 
 import {
@@ -42,7 +38,7 @@ import { UserAvatar } from './components/UserAvatar';
 
 import { LANGUAGES, TAB_BAR_HEIGHT } from '@/constants';
 import { useRefsContext } from '@/context';
-import { ChatwootIcon, NotificationIcon, SwitchIcon, TranslateIcon } from '@/svg-icons';
+import { NotificationIcon, SwitchIcon, TranslateIcon } from '@/svg-icons';
 import { GenericListType } from '@/types';
 
 import { useHaptic } from '@/utils';
@@ -83,13 +79,11 @@ const SettingsScreen = () => {
 
   // const { bottom } = useSafeAreaInsets();
 
-  const [showWidget, toggleWidget] = useState(false);
   const user = useSelector(selectUser);
   const {
     name,
     email,
     avatar_url: avatarUrl,
-    identifier_hash: identifierHash,
     account_id: activeAccountId,
   } = user || {};
 
@@ -104,23 +98,6 @@ const SettingsScreen = () => {
   const hasConversationPermission = CONVERSATION_PERMISSIONS.some(permission =>
     userPermissions.includes(permission),
   );
-
-  const userDetails = {
-    identifier: email,
-    name,
-    avatar_url: avatarUrl,
-    email,
-    identifier_hash: identifierHash,
-  };
-
-  const customAttributes = {
-    originatedFrom: 'mobile-app',
-    appName,
-    appVersion: appVersionDetails,
-    deviceId: DeviceInfo.getDeviceId(),
-    packageName: appName,
-    operatingSystem: Platform.OS, // android/ios
-  };
 
   const isChatwootCloud = useAppSelector(selectIsChatwootCloud);
 
@@ -195,10 +172,6 @@ const SettingsScreen = () => {
     // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [activeLocale]);
 
-  const openURL = async () => {
-    await WebBrowser.openBrowserAsync(HELP_URL);
-  };
-
   // const openSystemSettings = () => {
   //   if (Platform.OS === 'ios') {
   //     Linking.openURL('app-settings:');
@@ -255,25 +228,6 @@ const SettingsScreen = () => {
     },
   ];
 
-  const supportList: GenericListType[] = [
-    {
-      hasChevron: true,
-      title: i18n.t('SETTINGS.READ_DOCS'),
-      icon: <SwitchIcon />,
-      subtitle: '',
-      subtitleType: 'light',
-      onPressListItem: openURL,
-    },
-    {
-      hasChevron: true,
-      title: i18n.t('SETTINGS.CHAT_WITH_US'),
-      icon: <ChatwootIcon />,
-      subtitle: '',
-      subtitleType: 'light',
-      onPressListItem: () => toggleWidget(true),
-    },
-  ];
-
   return (
     <SafeAreaView style={tailwind.style('flex-1 bg-white font-inter-normal-20')}>
       <StatusBar
@@ -307,9 +261,6 @@ const SettingsScreen = () => {
         </Animated.View>
         <Animated.View style={tailwind.style('pt-6')}>
           <SettingsList sectionTitle={i18n.t('SETTINGS.PREFERENCES')} list={preferencesList} />
-        </Animated.View>
-        <Animated.View style={tailwind.style('pt-6')}>
-          <SettingsList sectionTitle={i18n.t('SETTINGS.SUPPORT')} list={supportList} />
         </Animated.View>
         <Animated.View style={tailwind.style('pt-6 mx-4')}>
           <Button
@@ -412,19 +363,6 @@ const SettingsScreen = () => {
           <DebugActions />
         </BottomSheetWrapper>
       </BottomSheetModal>
-      {!!process.env.EXPO_PUBLIC_CHATWOOT_WEBSITE_TOKEN &&
-        !!process.env.EXPO_PUBLIC_CHATWOOT_BASE_URL &&
-        !!showWidget && (
-          <ChatWootWidget
-            websiteToken={process.env.EXPO_PUBLIC_CHATWOOT_WEBSITE_TOKEN}
-            locale="en"
-            baseUrl={process.env.EXPO_PUBLIC_CHATWOOT_BASE_URL}
-            closeModal={() => toggleWidget(false)}
-            isModalVisible={showWidget}
-            user={userDetails}
-            customAttributes={customAttributes}
-          />
-        )}
     </SafeAreaView>
   );
 };
