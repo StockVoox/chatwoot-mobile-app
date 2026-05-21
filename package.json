@@ -18,6 +18,7 @@
     "check:config": "npx expo-config check",
     "build:android:local": "dotenv -c -- eas build -p android --profile production --local",
     "build:android": "eas build -p android --profile production",
+    "build:android:preview": "eas build -p android --profile preview",
     "build:ios:local": "dotenv -c -- eas build -p ios --profile production --local",
     "build:ios": "eas build -p ios --profile production",
     "build:all:local": "dotenv -c -- eas build -p ios --profile production --local && dotenv -c -- eas build -p android --profile production --local",
