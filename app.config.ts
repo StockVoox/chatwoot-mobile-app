@@ -33,9 +33,8 @@ export default ({ config }: ConfigContext): ExpoConfig => {
     scheme: 'targetlyaiapp',
     splash: {
       image: './assets/splash.png',
-      resizeMode: 'contain',
+      resizeMode: 'cover',
       backgroundColor: '#ffffff',
-      enableFullScreenImage_legacy: true,
     },
     ios: {
       supportsTablet: true,
@@ -93,6 +92,23 @@ export default ({ config }: ConfigContext): ExpoConfig => {
     },
     owner: 'targetai-mobile',
     plugins: [
+      [
+        'expo-splash-screen',
+        {
+          image: './assets/splash.png',
+          resizeMode: 'cover',
+          backgroundColor: '#ffffff',
+          ios: {
+            enableFullScreenImage_legacy: true,
+            resizeMode: 'cover',
+          },
+          android: {
+            resizeMode: 'cover',
+            backgroundColor: '#ffffff',
+          },
+        },
+      ],
+      './with-android-fullscreen-splash.js',
       'expo-font',
       ['react-native-permissions', { iosPermissions: ['Camera', 'PhotoLibrary', 'MediaLibrary'] }],
       ...(SENTRY_ENABLED
