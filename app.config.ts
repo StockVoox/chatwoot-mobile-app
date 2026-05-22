@@ -108,7 +108,6 @@ export default ({ config }: ConfigContext): ExpoConfig => {
           },
         },
       ],
-      './with-android-fullscreen-splash.js',
       'expo-font',
       ['react-native-permissions', { iosPermissions: ['Camera', 'PhotoLibrary', 'MediaLibrary'] }],
       ...(SENTRY_ENABLED
@@ -140,6 +139,8 @@ export default ({ config }: ConfigContext): ExpoConfig => {
         },
       ],
       './with-ffmpeg-pod.js',
+      // After expo-splash-screen: restores full-screen Android splash (expo defaults to centered icon).
+      './with-android-fullscreen-splash.js',
     ],
     androidNavigationBar: { backgroundColor: '#ffffff' },
   };
