@@ -24,13 +24,13 @@ export default ({ config }: ConfigContext): ExpoConfig => {
 
   return {
     name: 'Targetly AI',
-    slug: process.env.EXPO_PUBLIC_APP_SLUG || 'targetai-mobile',
+    slug: process.env.EXPO_PUBLIC_APP_SLUG || 'chatwoot',
     version: '4.5.0',
     orientation: 'portrait',
     icon: './assets/icon.png',
     userInterfaceStyle: 'light',
     newArchEnabled: false,
-    scheme: 'targetlyaiapp',
+    scheme: 'chatwootapp',
     splash: {
       image: './assets/splash.png',
       resizeMode: 'cover',
@@ -77,7 +77,7 @@ export default ({ config }: ConfigContext): ExpoConfig => {
           action: 'VIEW',
           data: [
             {
-              scheme: 'targetlyaiapp',
+              scheme: 'chatwootapp',
             },
           ],
           category: ['BROWSABLE', 'DEFAULT'],
@@ -90,7 +90,7 @@ export default ({ config }: ConfigContext): ExpoConfig => {
         storybookEnabled: process.env.EXPO_STORYBOOK_ENABLED,
       },
     },
-    owner: 'targetai-mobile',
+    owner: 'chatwoot',
     plugins: [
       [
         'expo-splash-screen',
@@ -140,7 +140,6 @@ export default ({ config }: ConfigContext): ExpoConfig => {
       ],
       './with-ffmpeg-pod.js',
       // After expo-splash-screen: restores full-screen Android splash (expo defaults to centered icon).
-      './with-android-fullscreen-splash.js',
     ],
     androidNavigationBar: { backgroundColor: '#ffffff' },
   };
